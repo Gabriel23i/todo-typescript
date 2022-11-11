@@ -9,12 +9,12 @@ const TaskForm = ({ btnText, taskList, setTaskList, task, handleUpdate }: ITaskF
 
     const [id, setId] = useState<number>(0);
     const [title, setTitle] = useState<string>('');
-    const [difficulty, setDifficulty] = useState<number | undefined>();
+    const [difficulty, setDifficulty] = useState<number | null>(null);
 
     const addTaskHandler = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        if(handleUpdate){
+        if(handleUpdate && difficulty){
             handleUpdate(id, title, difficulty);
         } else {
             const id = Math.floor(Math.random() * 1000);
@@ -24,6 +24,7 @@ const TaskForm = ({ btnText, taskList, setTaskList, task, handleUpdate }: ITaskF
             setTaskList!([...taskList, newTask]);
 
             setTitle('');
+            setDifficulty(null);
         };
     };
 
@@ -36,7 +37,7 @@ const TaskForm = ({ btnText, taskList, setTaskList, task, handleUpdate }: ITaskF
     };
 
     useEffect(()=>{
-        if(task){
+        if(task?.difficulty){
             setId(task.id);
             setTitle(task.title);
             setDifficulty(task.difficulty);
@@ -62,7 +63,7 @@ const TaskForm = ({ btnText, taskList, setTaskList, task, handleUpdate }: ITaskF
                     name="dificulty"
                     placeholder="Dificuldade da tarefa"
                     onChange={ handleChange } 
-                    value={ difficulty }
+                    value={ difficulty ? difficulty : '' }
                 />
             </Content>
             <input type="submit" value={ btnText } />
