@@ -15,7 +15,7 @@ function App() {
     const [taskList, setTaskList] = useState<ITask[]>([]);
     const [taskToUpdate, setTaskToUpdate] = useState<ITask | null>(null);
 
-    const isModal = useRef<HTMLDivElement>(null);
+    const modal = useRef<HTMLDivElement>(null);
 
     const deleteTask = (id:number) => {
         setTaskList(
@@ -27,12 +27,12 @@ function App() {
 
     const hideOrShowModal = (display: boolean) => {
 
-        if(isModal.current !== null){
+        if(modal.current !== null){
 
             if(display){
-                isModal.current.style.display = 'block';
+                modal.current.style.display = 'block';
             } else {
-                isModal.current.style.display = 'none';
+                modal.current.style.display = 'none';
             };
         };
     };
@@ -56,8 +56,8 @@ function App() {
     };
 
     useEffect(() => {
-        if(isModal.current !== null){
-            isModal.current.style.display = 'none';
+        if(modal.current !== null){
+            modal.current.style.display = 'none';
         };
     }, []);
 
@@ -65,7 +65,7 @@ function App() {
         <div className="App">
             <GlobalStyle />
             <Modal
-                reference={ isModal }
+                reference={ modal }
                 children={
                     <TaskForm
                         btnText='Editar Tarefa'

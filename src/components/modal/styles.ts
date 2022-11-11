@@ -15,6 +15,7 @@ export const ModalStyle = styled.div`
     flex-direction: column;
     justify-content: center;
     text-align: center;
+    border-radius: 4px;
 
     h2 {
         margin-bottom: 1em;
@@ -29,6 +30,7 @@ export const Fade = styled.div`
 
     width: 100%;
     height: 100%;
+    min-height:1046px;
     position: absolute;
     background-color: #000;
     opacity: 0.3;

@@ -11,10 +11,11 @@ export const FormStyles = styled.form`
         margin-bottom: 1.5em;
         border-radius: 0;
         border: 1px solid #282c34;
+        border-radius: 4px;
     };
 
     input[type='submit'] {
-        background-color: #61dafb;
+        background-color: #00a000;
         border: 1px solid #282c34;
         color: #000;
         transition: filter 0.2s;

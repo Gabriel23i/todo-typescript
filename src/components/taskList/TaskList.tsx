@@ -1,22 +1,20 @@
 import { Task, Details, Actions } from './styles';
 
-import { ITask } from '../../interfaces/Task';
+import { ITaskList } from '../../interfaces/TaskList';
 
-interface Props {
-    taskList:ITask[];
-    handleDelete(id:number):void;
-    handleEdit(task: ITask):void;
-};
-
-const TaskList = ({ taskList, handleDelete, handleEdit }: Props) => {
+const TaskList = ({ taskList, handleDelete, handleEdit }: ITaskList) => {
     return (
         <>
             {taskList.length > 0 ? (
                 taskList.map((task)=> (
                     <Task key={task.id}>
                         <Details>
-                            <h4>{task.title}</h4>
-                            <p>Dificuldade: {task.difficulty}</p>
+                            <p>
+                                Tarefa: <span>{task.title}</span>
+                            </p>
+                            <p>
+                                Dificuldade: <span>{task.difficulty}</span>
+                            </p>
                         </Details>
                         <Actions>
                             <i

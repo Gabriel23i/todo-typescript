@@ -1,22 +1,15 @@
-import React, { ChangeEvent, FormEvent, Dispatch, SetStateAction,  useEffect, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 
 import { FormStyles, Content } from './styles';
 
 import { ITask } from '../../interfaces/Task';
+import { ITaskForm } from '../../interfaces/TaskForm';
 
-interface Props {
-    btnText: string;
-    taskList: ITask[];
-    setTaskList?: Dispatch<SetStateAction<ITask[]>>
-    task?:ITask | null;
-    handleUpdate?(id: number, title: string, difficulty: number): void;
-};
-
-const TaskForm = ({ btnText, taskList, setTaskList, task, handleUpdate }: Props) => {
+const TaskForm = ({ btnText, taskList, setTaskList, task, handleUpdate }: ITaskForm) => {
 
     const [id, setId] = useState<number>(0);
     const [title, setTitle] = useState<string>('');
-    const [difficulty, setDifficulty] = useState<number>(0);
+    const [difficulty, setDifficulty] = useState<number | undefined>();
 
     const addTaskHandler = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -24,7 +17,6 @@ const TaskForm = ({ btnText, taskList, setTaskList, task, handleUpdate }: Props)
         if(handleUpdate){
             handleUpdate(id, title, difficulty);
         } else {
-
             const id = Math.floor(Math.random() * 1000);
 
             const newTask: ITask = { id, title, difficulty };
@@ -32,7 +24,6 @@ const TaskForm = ({ btnText, taskList, setTaskList, task, handleUpdate }: Props)
             setTaskList!([...taskList, newTask]);
 
             setTitle('');
-            setDifficulty(0);
         };
     };
 
@@ -60,8 +51,8 @@ const TaskForm = ({ btnText, taskList, setTaskList, task, handleUpdate }: Props)
                     type="text"
                     name="title"
                     placeholder="Título da tarefa"
-                    onChange={handleChange} 
-                    value={title}
+                    onChange={ handleChange } 
+                    value={ title }
                 />
             </Content>
             <Content>
@@ -70,11 +61,11 @@ const TaskForm = ({ btnText, taskList, setTaskList, task, handleUpdate }: Props)
                     type="number"
                     name="dificulty"
                     placeholder="Dificuldade da tarefa"
-                    onChange={handleChange} 
-                    value={difficulty}
+                    onChange={ handleChange } 
+                    value={ difficulty }
                 />
             </Content>
-            <input type="submit" value={btnText} />
+            <input type="submit" value={ btnText } />
         </FormStyles>
     );
 };
